@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model cart {
+  id            Int    @id @default(autoincrement())
+  userId        Int
+  productId     Int
+  qty           Int    @default(1)
+  products      product @relation(fields: [productId], references: [productId],onDelete: Cascade)
+  users         users  @relation(fields: [userId], references: [userId], onDelete: Cascade)
+}
+
+model category {
+  categoryId Int       @id @default(autoincrement())
+  type       String
+  img        String   
+  product    product[]
+}
+
+model orders {
+  orderId          Int      @id @default(autoincrement())
+  userId           Int
+  phone_number     Int      @default(0636539685)
+  products         Json[]
+  shipping_address String
+  shipping_price   Float
+  items_price      Float    @default(0.00)
+  tax_price        Float
+  totalPrice       Float
+  is_paid          Boolean  @default(false)
+  is_delivered     Boolean  @default(false)
+  paidAt           DateTime?
+  deliveredAt      DateTime? 
+  createdAt        DateTime @default(now())
+  transaction_id   String   @default("")
+  users            users    @relation(fields: [userId], references: [userId], onDelete: Cascade)
+}
+
+model product {
+  productId   Int       @id @default(autoincrement())
+  adminUser   Int       @default(50)
+  title       String
+  barcode     Int       @default(0)
+  description String
+  price       Float
+  image       String
+  inStock     Int
+  discount    Int       @default(0)
+  imgId       String?   @default("c3vygryvshwrn6cdnrk8")
+  categoryId  Int
+  users       users     @relation(fields: [adminUser], references: [userId])
+  category    category  @relation(fields: [categoryId], references: [categoryId], onDelete: Cascade)
+  reviews     reviews[]
+  cart        cart[]
+}
+
+model reviews {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+productId Int
+  body      String?
+  rating    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product   product  @relation(fields: [productId], references: [productId], onDelete: Cascade)
+  users     users    @relation(fields: [userId], references: [userId], onDelete: Cascade)
+}
+
+model users {
+  userId        Int       @id @default(autoincrement())
+  userName      String
+  password      String
+  email         String
+  previlage     Boolean   @default(false)
+  userPhoto     String
+  createdAt     DateTime  @default(now())
+  imgId         String?   @default("c3vygryvshwrn6cdnrk8")
+  external_auth Boolean   @default(false)
+  cart          cart[]
+  orders        orders[]
+  product       product[]
+  reviews       reviews[]
+}

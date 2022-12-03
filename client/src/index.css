@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;900&family=Rubik:wght@300;400;500;600&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Merriweather", serif;
+  font-family: "Rubik", sans-serif;
+}
+svg {
+}
+.active {
+  color: black;
+  padding: 0.3rem 0.2rem;
+  background-color: rgb(220, 220, 220);
+  border-right: 6px solid rgb(159, 82, 214);
+  border-radius: 0.2rem;
+  font-weight: bold;
+  transition: all 0.01s ease;
+}
+
+/* 404 */
+
+.page_404 {
+  padding: 40px 0;
+  background: #fff;
+  font-family: "Arvo", serif;
+  width: 80%;
+  margin: auto;
+}
+
+.page_404 img {
+  width: 100%;
+}
+
+.four_zero_four_bg {
+  background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+  height: 400px;
+  background-position: center;
+}
+
+.four_zero_four_bg h1 {
+  font-size: 80px;
+}
+
+.four_zero_four_bg h3 {
+  font-size: 80px;
+}
+
+.link_404 {
+  color: #fff !important;
+  padding: 10px 20px;
+  background: #39ac31;
+  margin: 20px 0;
+  display: inline-block;
+  text-decoration: none;
+}
+.contant_box_404 {
+  margin-top: -50px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+/* 404 */
+
+/* modal */
+.modal {
+  width: 700px;
+}
+@media (max-width: 768px) {
+  .modal {
+    width: 320px;
+  }
+}
+/* modal */
+
+.bad {
+  font-size: 13px;
+}
+
+.rotate {
+  font-size: 38px;
+  animation: rotate 1.2s linear infinite;
+}
+.rotate-small {
+  font-size: 28px;
+  animation: rotate 1.2s linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
